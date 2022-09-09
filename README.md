@@ -48,13 +48,20 @@ by printing out the coefficients for the predictors (see code near line 93):
  
 
 For linear models the equation will look similar to a1x1 + a2x2 + … anxn + a0 = 0 (where a is some coefficient and x is a predictive variable)
-Looking at the equation I noticed that thall (Thal rate) and caa (number of major vessels) had the largest impact (followed closely by age and chest pain).
+
+
+From the equation, thall (Thal rate) and caa (number of major vessels) had the largest impact (followed closely by age and chest pain). Here is what a graph of the SVM line would look like with these two variables:
+<img src="svm-graph.jpeg" alt="image"> 
+
+In order to graph the SVM line I used the e1071 libaray and built the SVM model. 
+This library allows you to slice and graph two of the variables while setting the others at a constant (I chose the median for each). 
 
 
 ### Dependencies
 
 * RStudio or similar
 * Kernlab library
+* optional: e1071 library for final graph
 
 
 ### Executing program

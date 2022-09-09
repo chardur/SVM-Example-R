@@ -96,3 +96,30 @@ a
 a0 <- -model@b
 a0
 
+# optional graphs to help visualize
+library(e1071)
+
+# use the e1071 library to build a svm model
+model <- svm(output~.,
+             data=df, 
+             type='C-classification', 
+             cost=0.1, 
+             kernel ="linear", 
+             scale=TRUE)
+
+# can graph two diemnsions while setting the other predictors at a constant using slice
+# thall and caa
+plot(model,
+     data=df,
+     thall ~ caa, 
+     slice=list(sex=1, trtbps=130, chol=243, fbs=0.15, restecg=1, thalachh=150, exng=0, 
+                oldpeak=1, slp=1, cp=1, age=55),
+     color.palette =  hsv_palette())
+
+# age and chest pain (cp)
+plot(model,
+     data=df,
+     age ~ cp, 
+     slice=list(sex=1, trtbps=130, chol=243, fbs=0.15, restecg=1, thalachh=150, exng=0, 
+                oldpeak=1, slp=1, caa=0, thall=150),
+     color.palette =  hsv_palette())
