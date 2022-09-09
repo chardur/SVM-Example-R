@@ -31,6 +31,8 @@ Once a model is chosen, it is then tested with the test data to estimate the fin
 ## Analysis
 
 Graphing the relationship between c and accuracy, I found that c values between 0.01 and 10,000 performed best.
+
+
 <img src="cvalues.jpeg" alt="image"> 
 
 
@@ -42,9 +44,7 @@ To find out what variables have the largest impact on the model I built a mathem
 by printing out the coefficients for the predictors (see code near line 93):
 
 
-(0.05689157 * age) - (0.35426058 * sex) + (0.51832134 * cp) - (0.19717111 * trtbps) - (0.19717111 * chol)
- + (0.11892681 * fbs) + (0.22847900 * restecg) + (0.44512772 * thalachh) - (0.21803852 * exng) 
- - (0.33412498 * oldpeak) + (0.34774562 * slp) - (0.58461516 * caa) - (0.65778699 * thall) + 0.1721164 = 0
+(0.05689157 * age) - (0.35426058 * sex) + (0.51832134 * cp) - (0.19717111 * trtbps) - (0.19717111 * chol) + (0.11892681 * fbs) + (0.22847900 * restecg) + (0.44512772 * thalachh) - (0.21803852 * exng) - (0.33412498 * oldpeak) + (0.34774562 * slp) - (0.58461516 * caa) - (0.65778699 * thall) + 0.1721164 = 0
  
 
 For linear models the equation will look similar to a1x1 + a2x2 + … anxn + a0 = 0 (where a is some coefficient and x is a predictive variable)
@@ -68,4 +68,4 @@ code blocks for commands
 ## Acknowledgments
 
 * [RASHIK RAHMAN heart dataset](https://www.kaggle.com/datasets/rashikrahmanpritom/heart-attack-analysis-prediction-dataset)
-* [Based on GATECH ISYE6501 course, Dr Joel Sokol](https://www.kaggle.com/datasets/rashikrahmanpritom/heart-attack-analysis-prediction-dataset)
+* [Based on GATECH ISYE6501 course, Dr Joel Sokol](https://omscs.gatech.edu/current-courses)
