@@ -13,7 +13,7 @@ In this example, I will show how to model a SVM classifier, then use it to analy
 * [Kaggle heart dataset](https://www.kaggle.com/datasets/rashikrahmanpritom/heart-attack-analysis-prediction-dataset)
 * Rows 1-13 are predictive
 * Row 14 is the categorie: 0= less chance of heart attack 1= more chance of heart attack
-* [Click here to view the detailed data report] (https://github.com/chardur/SVM-Example-R/blob/main/report.html)
+* [Click here to view the detailed data report](https://github.com/chardur/SVM-Example-R/blob/main/report.html)
 
 ## Model
 
