@@ -6,6 +6,10 @@ set.seed(13)
 # read the data into a data frame
 df <-  read.csv('./heart.csv', header=TRUE)
 
+# Optional Explore the data quickly
+# library(DataExplorer)
+# DataExplorer::create_report(df, y = 'output')
+
 # shuffle data to minimize random effects, or effects from sorted data
 shuffled_df <-  df[sample(nrow(df)),]
 
@@ -96,30 +100,50 @@ a
 a0 <- -model@b
 a0
 
-# optional graphs to help visualize
-library(e1071)
+# ############ optional graphs to help visualize #########
+# # use the e1071 library to build a svm model
+# library(e1071)
+# model <- svm(output~.,
+#              data=df, 
+#              type='C-classification', 
+#              cost=0.1, 
+#              kernel ="linear", 
+#              scale=TRUE)
+# 
+# # can graph two diemnsions while setting the other predictors at a constant using slice
+# # thall and caa
+# dev.new()
+# plot(model,
+#      data=df,
+#      thall ~ caa, 
+#      slice=list(sex=1, trtbps=130, chol=243, fbs=0.15, restecg=1, thalachh=150, exng=0, 
+#                 oldpeak=1, slp=1, cp=1, age=55),
+#      color.palette =  hsv_palette())
+# 
+# # cp and thalachh
+# dev.new()
+# plot(model,
+#      data=df,
+#      cp ~ thalachh, 
+#      slice=list(sex=1, trtbps=130, chol=243, fbs=0.15, restecg=1, thall=2, exng=0, 
+#                 oldpeak=1, slp=1, caa=0, age=55),
+#      color.palette =  hsv_palette())
 
-# use the e1071 library to build a svm model
-model <- svm(output~.,
-             data=df, 
-             type='C-classification', 
-             cost=0.1, 
-             kernel ="linear", 
-             scale=TRUE)
 
-# can graph two diemnsions while setting the other predictors at a constant using slice
-# thall and caa
-plot(model,
-     data=df,
-     thall ~ caa, 
-     slice=list(sex=1, trtbps=130, chol=243, fbs=0.15, restecg=1, thalachh=150, exng=0, 
-                oldpeak=1, slp=1, cp=1, age=55),
-     color.palette =  hsv_palette())
+model <- ksvm(as.factor(output)~thalachh+cp,
+              data=heart_train,
+              type = "C-svc", # Use C-classification method
+              kernel = "vanilladot", # Use simple linear kernel
+              C = 0.1,
+              scaled=TRUE) # have ksvm scale the data for you !!important
 
-# age and chest pain (cp)
-plot(model,
-     data=df,
-     age ~ cp, 
-     slice=list(sex=1, trtbps=130, chol=243, fbs=0.15, restecg=1, thalachh=150, exng=0, 
-                oldpeak=1, slp=1, caa=0, thall=150),
-     color.palette =  hsv_palette())
+pred <- predict(model,heart_val)
+score <- sum(pred == heart_val[,14]) / nrow(heart_val)
+score
+dev.new()
+kernlab::plot(model,data=df)
+
+library(ggplot2)
+dev.new()
+ggplot(df, aes(cp, thalachh, color = as.factor(output))) + geom_point() +
+  scale_color_manual(values = c("blue", "red")) +ggtitle("3 clusters, nstart=5")
