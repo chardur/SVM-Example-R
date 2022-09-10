@@ -31,6 +31,9 @@ Once a model is chosen, it is then tested with the test data to estimate the fin
 
 ## Analysis
 
+[Click here to view the data analysis report](https://chardur.github.io/SVM-Example-R/report.html)
+
+
 Graphing the relationship between c and accuracy, I found that c values between 0.01 and 10,000 performed best.
 <img src="cvalues.jpeg" alt="image"> 
 
@@ -50,7 +53,12 @@ For linear models the equation will look similar to a1x1 + a2x2 + … anxn + a0 
 The [data report](https://chardur.github.io/SVM-Example-R/report.html) correlation analysis indicated that CP (chest pain) and thalachh (maximum heart rate) had high correlation with output. Here is a graph with these two features:
 <img src="scatter-graph-original.jpg" alt="image"> 
 
-You can see the support vector in the graph below separating the red and blue shaded areas: 
+You can see the support vector in the graph below separating the red and blue shaded areas. 
+The lower left (low chest pain, low max heart rate) section in red has a higher rate of 0 output (less chance of heart attack). 
+As it fades into the blue color, the rate of 1 output (more chance of heart attack) is higher. 
+The white area indicates the support vector found in the model. 
+
+
 <img src="scatter-graph-svm.jpg" alt="image">
 
 
