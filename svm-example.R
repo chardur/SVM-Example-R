@@ -100,36 +100,7 @@ a
 a0 <- -model@b
 a0
 
-# ############ optional graphs to help visualize #########
-# # use the e1071 library to build a svm model
-# library(e1071)
-# model <- svm(output~.,
-#              data=df, 
-#              type='C-classification', 
-#              cost=0.1, 
-#              kernel ="linear", 
-#              scale=TRUE)
-# 
-# # can graph two diemnsions while setting the other predictors at a constant using slice
-# # thall and caa
-# dev.new()
-# plot(model,
-#      data=df,
-#      thall ~ caa, 
-#      slice=list(sex=1, trtbps=130, chol=243, fbs=0.15, restecg=1, thalachh=150, exng=0, 
-#                 oldpeak=1, slp=1, cp=1, age=55),
-#      color.palette =  hsv_palette())
-# 
-# # cp and thalachh
-# dev.new()
-# plot(model,
-#      data=df,
-#      cp ~ thalachh, 
-#      slice=list(sex=1, trtbps=130, chol=243, fbs=0.15, restecg=1, thall=2, exng=0, 
-#                 oldpeak=1, slp=1, caa=0, age=55),
-#      color.palette =  hsv_palette())
-
-
+# In order to graph, only two variables are used in the model
 model <- ksvm(as.factor(output)~thalachh+cp,
               data=heart_train,
               type = "C-svc", # Use C-classification method
@@ -141,9 +112,11 @@ pred <- predict(model,heart_val)
 score <- sum(pred == heart_val[,14]) / nrow(heart_val)
 score
 dev.new()
-kernlab::plot(model,data=df)
+plot(model,data=df)
 
+# Optional graph
 library(ggplot2)
 dev.new()
 ggplot(df, aes(cp, thalachh, color = as.factor(output))) + geom_point() +
-  scale_color_manual(values = c("blue", "red")) +ggtitle("3 clusters, nstart=5")
+  scale_color_manual(values = c("blue", "red")) +
+  ggtitle("Chest Pain (CP) & maximum heart rate (thalachh) vs HeartAttack")
